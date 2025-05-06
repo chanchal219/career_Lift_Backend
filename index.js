@@ -21,16 +21,17 @@ const _dirname = path.resolve();//index js ka path store kra lia
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));//image ko access kr ske
 app.use(cookieParser()); //cookies access kr paenge
-const corsOptions = {
-    origin: 'https://jobwebsite-youtube-1.onrender.com/onrender.com/',
-    credentials: true
-}
+// const corsOptions = {
+//     origin: 'https://jobwebsite-youtube-1.onrender.com/onrender.com/',
+//     credentials: true
+// }
 // allow cookies/authorization headers
-app.use(cors({
-    origin: 'http://localhost:5173', 
-    credentials: true               
+// app.use(cors({
+//     origin: 'http://localhost:5173', 
+//     credentials: true               
     
-}));
+// }));
+app.use(cors())
 
 
 app.use("/api/v1/user", userRoute);
@@ -38,9 +39,12 @@ app.use("/api/v1/company", companyRoute);
 app.use("/api/v1/job", jobRoute);
 app.use("/api/v1/application", applicationRoute);
 
-app.use(express.static(path.join(_dirname, "/frontend/dist")));
-app.get("*", (_, res) => {
-    res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
+// app.use(express.static(path.join(_dirname, "/frontend/dist")));
+// app.get("*", (_, res) => {
+//     res.sendFile(path.resolve(_dirname, "frontend", "dist", "index.html"));
+// })
+app.get('/',(req,res)=>{
+    res.send("api is working")
 })
 
 
